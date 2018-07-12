@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>net.SH</groupId>
+    <artifactId>rgface</artifactId>
+    <version>0.1.6-SNAPSHOT</version>
+    <!--<packaging>war</packaging>-->
+    <packaging>jar</packaging>
+
+    <name>rgface</name>
+    <description>Demo project for Spring Boot</description>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.0.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <!--<scope>provided</scope> &lt;!&ndash; 打包取消注解 &ndash;&gt;-->
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+
+        <!--模板引擎-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+        <!--thymeleaf  LEGACYHTML5 解释模式-->
+        <dependency>
+            <groupId>net.sourceforge.nekohtml</groupId>
+            <artifactId>nekohtml</artifactId>
+            <version>1.9.22</version>
+        </dependency>
+
+        <!-- json -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.22</version>
+        </dependency>
+
+        <!-- 热部署 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- mysql -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- log -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.20</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Excel 导入导出 -->
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-base</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-web</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-annotation</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+
+        <!-- ES搜索 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.searchbox</groupId>
+            <artifactId>jest</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.java.dev.jna</groupId>
+            <artifactId>jna</artifactId>
+        </dependency>
+
+        <!-- Redis 缓存 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+            <version>2.4.2</version>
+        </dependency>
+
+        <!-- 动态库调用 -->
+        <!--<dependency>-->
+            <!--<groupId>net.java.dev.jna</groupId>-->
+            <!--<artifactId>jna</artifactId>-->
+            <!--<version>4.5.1</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.apache.mina</groupId>-->
+            <!--<artifactId>mina-core</artifactId>-->
+            <!--<version>2.0.16</version>-->
+        <!--</dependency>-->
+
+        <!-- 本地lib -->
+        <dependency>
+            <groupId>com.sh</groupId>
+            <artifactId>sdk-Server</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/SDKServerJava.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sh</groupId>
+            <artifactId>jna-4.5.1-sources</artifactId>
+            <version>4.5.1</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/jna-4.5.1-sources.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sh</groupId>
+            <artifactId>jna-4.5.1</artifactId>
+            <version>4.5.1</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/jna-4.5.1.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sh</groupId>
+            <artifactId>mina-core-2.0.16-sources</artifactId>
+            <version>2.0.16</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/mina-core-2.0.16-sources.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sh</groupId>
+            <artifactId>mina-core-2.0.16</artifactId>
+            <version>2.0.16</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/mina-core-2.0.16.jar</systemPath>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+
+        <!--<finalName>rgface</finalName>-->
+
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork> <!-- 启动热部署 -->
+                    <jvmArguments>
+                        -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005
+                    </jvmArguments>
+                   <!--<includeSystemScope>true</includeSystemScope> &lt;!&ndash; Maven 打包本地lib &ndash;&gt;-->
+                </configuration>
+            </plugin>
+
+            <!-- 打包本地libs -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <directory>libs</directory> <!-- 文件夹名称 -->
+                            <targetPath>WEB-INF/lib/</targetPath>
+                            <includes>
+                                <include>**/*.jar</include>
+                            </includes>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>

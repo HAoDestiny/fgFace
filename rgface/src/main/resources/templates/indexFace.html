@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Face</title>
+
+    <!-- Main CSS-->
+    <link rel="icon" href="static/img/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="static/css/main.css">
+    <link rel="stylesheet" type="text/css" href="static/css/alert.css">
+    <link rel="stylesheet" type="text/css" href="static/css/AdminLTE.min.css">
+
+    <!-- 3D -->
+    <link rel="stylesheet" type="text/css" href="static/css/3d.css">
+
+    <!-- Time -->
+    <link rel="stylesheet" type="text/css" href="static/css/flipTimer.css">
+
+    <!-- bg -->
+    <link rel="stylesheet" type="text/css" href="static/css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="static/css/index_style.css">
+
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css"
+          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script type="text/javascript" src="static/js/wfs.js"></script>
+    <script type="text/javascript" src="static/js/jquery.js"></script>
+    <script type="text/javascript" src="static/js/base.js"></script>
+    <script type="text/javascript" src="static/js/popper.min.js"></script>
+    <script type="text/javascript" src="static/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="static/js/alert.js"></script>
+
+    <!-- NumRun -->
+    <script type="text/javascript" src="static/js/jquery.numRun.js"></script>
+
+    <style type="text/css">
+        body {
+            background: #E5E5E5;
+        }
+
+        /* Header */
+        .app-title {
+            margin: 0;
+            height: 100px;
+        }
+
+        /* Vidoer */
+        .tile {
+            width: 640px;
+            height: 780px;
+            margin-left: 2%;
+            margin-top: 2%;
+        }
+
+        .tile #video1 {
+            margin: 0;
+            padding: 0;
+            background-color: #0d1214;
+        }
+
+        /* Time */
+        .tv_time #webTime {
+            font-size: 80px;
+            font-weight: 200px;
+            width: 400px;
+        }
+
+        .tv_time #webDate {
+            color: #6c757d !important;
+            font-size: 20px;
+            margin-left: 20px;
+        }
+        .wrap {padding: 15px 0;background: #00000000;}
+        .doweboks { width: 350px; margin: 0 auto;}
+        .doweboks li { width: 320px; overflow: hidden; zoom: 1;}
+        .doweboks .item { padding: 15px 0; overflow: hidden; zoom: 1;}/*border-bottom: 1px solid #ccc;*/
+        .doweboks li em { float: left; width: 24px; height: 24px; line-height: 24px; font-size: 12px; font-style: normal; text-align: center; color: #FFFFFF;}
+        .doweboks li img { float: left; height: 150px; margin: 0 15px; vertical-align: top;}
+        .doweboks dl { font-size: 12px;}
+        .doweboks dt { padding-bottom: 5px; font-size: 14px; font-weight: 700;color: #FBFBFB;}
+        .doweboks dd { margin-top: 8px; color: #FFF;}
+        .doweboks a { color: #FFF; text-decoration: none;}
+        .doweboks a:hover { color: #000;}
+
+        .runNum{
+            margin: 0 auto;
+            padding: 0;
+            overflow: hidden;
+            height: 50px;
+            line-height: 50px;
+            border-top: #CCCCCC solid 1px;
+            border-bottom: #CCCCCC solid 1px;
+            text-align: center;
+            font-weight: bold;
+            position: relative;
+        }
+        .runNum>li{
+            list-style: none;
+            width: 40px;
+            float: left;
+            position: absolute;
+        }
+    </style>
+
+</head>
+<body>
+<script type="text/javascript" src="static/js/three.js"></script>
+<script type="text/javascript" src="static/js/libs/tween.min.js"></script>
+<script type="text/javascript" src="static/js/controls/TrackballControls.js"></script>
+<script type="text/javascript" src="static/js/renderers/CSS3DRenderer.js"></script>
+<script type="text/javascript" src="static/js/jquery.vticker.min.js"></script>
+<script type="text/javascript" src="static/js/jquery.flipTimer.js"></script>
+
+
+<div style="position:relative; width: 100%; height: 100%;">
+    <!-- 星空背景 Start -->
+    <div class="header" id="demo" style="position:absolute;">
+        <canvas id="canvas"></canvas>
+    </div>
+    <!--用来解决视频右键菜单，用于视频上面的遮罩层-->
+    <div class="videozz"></div>
+    <!--音乐 START-->
+    <audio controls="true" autoplay="autoplay" class="audio">
+        <source src="static/css/Music.mp3" type="audio/mp3">
+        <source src="static/css/Music.ogg" type="audio/ogg">
+        <source src="static/css/Music.aac" type="audio/mp4">
+    </audio>
+    <!--音乐 END-->
+    <!-- 背景 Start -->
+    <script src="static/js/bg.js" type="text/javascript"></script>
+    <!-- 背景 End -->
+    <!-- 星空背景 End -->
+
+    <!-- Header Start-->
+    <div class="app-title">
+
+        <div class="div">
+            <h1 style="font-size: 50px;"><i class="fa fa-desktop"></i> 宿舍单元出入口</h1>
+            <p> NORTH</p>
+        </div>
+    </div>
+    <!-- Header End-->
+
+    <!-- Main left -->
+    <div style="width: 35%; height: 100%; position: absolute;">
+        <div style="width: 100%;height:100%;margin-left: 1%;background-color: #00000000">
+            <!-- 视频 Start -->
+            <video id="FaceVideo" width="100%" height="40%" style="background-color: #000000; margin-top: 5%;margin-left: 2%;"></video>
+            <!-- 视频 End -->
+
+            <!-- Time -->
+            <div class="dowebok" style="text-align: center;margin-top: 5%;">
+                <div class="hours"></div>
+                <div class="minutes"></div>
+                <div class="seconds"></div>
+            </div>
+            <!-- Time -->
+
+            <!-- NumRun -->
+            <div style="text-align: center;margin-top: 20px;">
+                <span style="font-size: 44px;color: #FFFFFF;">外出人数</span>
+                <div style="margin: 30px auto;width: 320px;font-size:44px;color: #FFFFFF;">
+                    <ul class="runNum" id="runNum"></ul>
+                </div>
+            </div>
+            <!--<button id="addNum">添加</button>-->
+            <!-- NumRun -->
+        </div>
+    </div>
+    <!-- Main left -->
+
+    <!-- Main right -->
+    <div class="wrap" style="width: 27%; height: 100%; float: right;margin-right: 2%;">
+
+        <div class="doweboks" style="font-size: 12px;">
+            <ul>
+
+            </ul>
+        </div>
+    </div>
+    <!-- Main right -->
+
+    <!-- Main center -->
+    <div class="show_info" style="background-color: #00000000;">
+        <div class="info_my">
+            <img id="msg_avatar_img" src="static/img/d_face.jpg" style="width: 250px; height: 300px;margin-top: 20px;"/>
+            <div class="info_mem" style="font-size: 30px;margin-top: 50px;">
+                <div class="nickname"style="margin-bottom: 20px;">姓名: </div>
+                <div class="id" style="margin-bottom: 20px;">班级: </div>
+                <div class="vote"style="margin-bottom: 20px;">编号: </div>
+                <div class="personnelType">类型: </div>
+            </div>
+        </div>
+        <!--<div class="intro">我想说的那些事你想听吗？曾经，在一个很远很远的地方，那里绿水长青，没有现在都市的喧哗，犹如室外桃园。。。想知道更多精彩内容吗?</div>-->
+    </div>
+    <!-- Main center -->
+</div>
+<!-- Body End -->
+<!-- footer Start -->
+<footer class="" style="margin-left:0;width:100%; height:20px;line-height:20px;position: fixed;left: 0px;bottom: 0px;">
+    <div class="pull-right" >
+     <b style="line-height: 20px;padding-bottom: 10px; font-size: 12px;">Version</b> 1.0.0
+    </div>
+     <strong>Copyright © 2018-2020 <a href="#" style="">广州视翰电子科技有限公司</a>.</strong> 版权所有.
+</footer>
+<!-- footer End -->
+</body>
+<script type="text/javascript">
+
+    //初始化时间
+    $(function(){
+        $('.dowebok').flipTimer({
+            seconds: true
+        });
+    });
+
+    getGoOutCount();
+
+    var wfs = null;
+    var isSupWfs;
+
+    Wfs.isSupported() ? isSupWfs = true : isSupWfs = false;
+
+    if (!isSupWfs) {
+        window.alert('浏览器不支持！\n支持win8/win10的ie11(需安装更新)和edge\n支持chrome/safari/firefox等较新版本\n如果使用360等多内核浏览器，请保持更新并切换极速模式');
+    }
+
+    $(document.body).css({
+        "overflow-x": "hidden",
+        "overflow-y": "hidden"
+    });
+
+    if (isSupWfs) {
+
+        var FaceVideo = document.getElementById("FaceVideo"); //document.getElementById("FaceVideo");
+        wfs = new Wfs();
+        wfs.attachMedia(FaceVideo, 'ch1', 'H264Raw', 'api/stream/20180531'); //document.getElementById('deviceID').value
+
+    } else {
+
+        window.alert('浏览器不支持！\n支持win8/win10的ie11(需安装更新)和edge\n支持chrome/safari/firefox等较新版本\n如果使用360等多内核浏览器，请保持更新并切换极速模式');
+    }
+
+    //updateTime
+    getLangDate();
+
+    var M = {};
+    var i = 0;
+    var lists = [];
+    function tip(name, type, classCode, personnelStatus, code, imgPath) {
+        // M.dialog1 = jqueryAlert({
+        //     'content': tip,
+        //     'closeTime': 2000
+        // })
+        i ++;
+        var html = '<li>' +
+            '                    <div class="item">' +
+            '                        <em> </em><img src="'+ imgPath +'" style="width:102px;height: 130px;" alt="">' +
+            '                        <dl>' +
+            '                            <dt>'+ name +'</dt>' +
+            '                            <dd>类型：'+ type +'</dd>' +
+            '                            <dd>班级：'+ classCode +'</dd>' +
+            '                            <dd>状态：'+ personnelStatus + '</dd>' +
+            '                            <dd>编号：'+ code +'</dd>' +
+            '                        </dl>' +
+            '                    </div>' +
+            '                </li>';
+
+
+
+        if (lists.length === 5) {
+            lists.shift();
+        }
+
+        lists.push(html);
+
+        //alert(lists.length);
+        $('.doweboks ul').empty();
+        $('.doweboks ul').append(lists);
+
+        // if (i === 5) {
+        //     $('.doweboks').vTicker({
+        //         showItems: 5,
+        //         animation: 'fade',
+        //         isPaused:false
+        //     });
+        // }
+    }
+
+    function getGoOutCount() {
+        $.api("getGoOutCount", {}, function (ret) {
+
+            if (ret.status === "SUCCESS") {
+
+                //外出人数
+                $("#runNum").runNum($("#runNum").prefixInteger(ret.data)); //初始化
+                // $("#addNum").click(function(){
+                //     $("#runNum").add(1);
+                // });
+            }
+
+        }, "user");
+    }
+
+    var personArray = new Array; //头像
+    var camera, scene, renderer;
+    var controls;
+    var CurPersonNum = 0;
+    var objects = [];
+    var targets = {table: [], sphere: [], helix: [], grid: []};
+
+    <!-- 3D wall -->
+    //var CurPersonNum = 0;
+    // animate
+    var _in = ['bounceIn', 'bounceInDown', 'bounceInLeft', 'bounceInRight', 'bounceInUp', 'fadeIn', 'fadeInDown', 'fadeInDownBig', 'fadeInLeft', 'fadeInLeftBig', 'fadeInRight', 'fadeInRightBig', 'fadeInUp', 'fadeInUpBig', 'rotateIn', 'rotateInDownLeft', 'rotateInDownRight', 'rotateInUpLeft', 'rotateInUpRight', 'slideInDown', 'slideInLeft', 'slideInRight'];
+    var _out = ['bounceOut', 'bounceOutDown', 'bounceOutLeft', 'bounceOutRight', 'bounceOutUp', 'fadeOut', 'fadeOutDown', 'fadeOutDownBig', 'fadeOutLeft', 'fadeOutLeftBig', 'fadeOutRight', 'fadeOutRightBig', 'fadeOutUp', 'fadeOutUpBig', 'rotateOut', 'rotateOutDownLeft', 'rotateOutDownRight', 'rotateOutUpLeft', 'rotateOutUpRight', 'slideOutDown', 'slideOutLeft', 'slideOutRight'];
+
+    // // 模拟推送数据
+    // var s = setInterval(function () {
+    //     // get animate
+    //     var rand_in = parseInt(Math.random() * _in.length, 10);
+    //     var rand_out = parseInt(Math.random() * _out.length, 10);
+    //     if (CurPersonNum >= personArray.length) {
+    //         CurPersonNum = 0;
+    //     }
+    //     $('.show_info').show();
+    //     $('.show_info').addClass(_in[rand_in]);
+    //     setTimeout(function () {
+    //         $('.show_info').removeClass(_in[rand_in]);
+    //         // 更改展示的图片
+    //         var img = document.getElementsByClassName('element')[CurPersonNum].getElementsByTagName('img')[0];
+    //         img.setAttribute('src', 'static/img/3_qq_31971935.jpg');
+    //         ++CurPersonNum;
+    //         setTimeout(function () {
+    //             $('.show_info').addClass(_out[rand_out]);
+    //             setTimeout(function () {
+    //                 $('.show_info').removeClass(_out[rand_out]);
+    //                 $('.show_info').hide();
+    //             }, 1000);
+    //         }, 1500);
+    //     }, 1000);
+    // }, 45000);
+    //
+    // // 生成虚拟数据
+    // for (var i = 0; i < 199; i++) {
+    //     personArray.push({image: "http://s13.sinaimg.cn/mw690/0039DkSpzy6SeopBack0c&690.jpg"}); //添加对象
+    // }
+    //
+    // var table = new Array;
+    // for (var i = 0; i < personArray.length; i++) {
+    //     table[i] = new Object();
+    //     if (i < personArray.length) {
+    //         table[i] = personArray[i];
+    //         table[i].src = personArray[i].thumb_image;
+    //     }
+    //     table[i].p_x = i % 20 + 1;
+    //     table[i].p_y = Math.floor(i / 20) + 1;
+    // }
+    //
+    // camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 10000);
+    // camera.position.z = 3000; //初始化大小
+    //
+    // scene = new THREE.Scene();
+
+    // 生成虚拟数据
+    // for (var i = 0; i < 99; i++) {
+    //     personArray.push({image: "http://s13.sinaimg.cn/mw690/0039DkSpzy6SeopBack0c&690.jpg"}); //添加对象
+    // }
+
+    // init();
+    // animate();
+
+    function init() {
+
+        var table3D = new Array;
+        for (var i = 0; i < personArray.length; i++) {
+            table3D[i] = new Object();
+            if (i < personArray.length) {
+                table3D[i] = personArray[i];
+            }
+            table3D[i].p_x = i % 20 + 1;
+            table3D[i].p_y = Math.floor(i / 20) + 1;
+        }
+
+        // table
+        for (var i = 0; i < table3D.length; i++) {
+
+            var element = document.createElement('div');
+            element.className = 'element';
+            element.style.backgroundColor = 'rgba(0,127,127,' + (Math.random() * 0.5 + 0.25) + ')';
+
+            var img = document.createElement('img');
+            img.src = table3D[i].image;
+            element.appendChild(img);
+
+            var object = new THREE.CSS3DObject(element);
+            object.position.x = Math.random() * 4000 - 2000;
+            object.position.y = Math.random() * 4000 - 2000;
+            object.position.z = Math.random() * 4000 - 2000;
+            scene.add(object);
+
+            objects.push(object);
+
+            // 表格需要坐标进行排序的
+            var object = new THREE.Object3D();
+            // object.position.x = ( table[ i + 3 ] * 140 ) - 1330;
+            // object.position.y = - ( table[ i + 4 ] * 180 ) + 990;
+            object.position.x = (table3D[i].p_x * 140) - 1330; //初始化显示位置(x)
+            object.position.y = -(table3D[i].p_y * 180) + 1290; //初始化显示位置(y)
+
+            targets.table.push(object);
+
+        }
+
+        // sphere
+
+        var vector = new THREE.Vector3();
+        var spherical = new THREE.Spherical();
+
+        for (var i = 0, l = objects.length; i < l; i++) {
+
+            var phi = Math.acos(-1 + (2 * i) / l);
+            var theta = Math.sqrt(l * Math.PI) * phi;
+
+            var object = new THREE.Object3D();
+
+            spherical.set(800, phi, theta);
+
+            object.position.setFromSpherical(spherical);
+
+            vector.copy(object.position).multiplyScalar(2);
+
+            object.lookAt(vector);
+
+            targets.sphere.push(object);
+
+        }
+
+        // helix
+
+        var vector = new THREE.Vector3();
+        var cylindrical = new THREE.Cylindrical();
+
+        for (var i = 0, l = objects.length; i < l; i++) {
+
+            var theta = i * 0.175 + Math.PI;
+            var y = -(i * 5) + 450;
+
+            var object = new THREE.Object3D();
+
+            // 参数一 圈的大小 参数二 左右间距 参数三 上下间距
+            cylindrical.set(900, theta, y);
+
+            object.position.setFromCylindrical(cylindrical);
+
+            vector.x = object.position.x * 2;
+            vector.y = object.position.y;
+            vector.z = object.position.z * 2;
+
+            object.lookAt(vector);
+
+            targets.helix.push(object);
+
+        }
+
+        // grid
+
+        for (var i = 0; i < objects.length; i++) {
+
+            var object = new THREE.Object3D();
+
+            object.position.x = ((i % 5) * 400) - 800; // 400 图片的左右间距  800 x轴中心店
+            object.position.y = (-(Math.floor(i / 5) % 5) * 300) + 500;  // 500 y轴中心店
+            object.position.z = (Math.floor(i / 25)) * 200 - 800;// 300调整 片间距 800z轴中心店
+
+            targets.grid.push(object);
+
+        }
+
+        //渲染
+        renderer = new THREE.CSS3DRenderer();
+        renderer.setSize(window.innerWidth * 0.65, window.innerHeight * 0.9); //渲染位置--初始化居中
+        renderer.domElement.style.position = 'absolute';
+        document.getElementById('container').appendChild(renderer.domElement);
+
+        // 鼠标控制
+        controls = new THREE.TrackballControls(camera, renderer.domElement);
+        controls.rotateSpeed = 0.5;
+        controls.minDistance = 500;
+        controls.maxDistance = 6000;
+        controls.addEventListener('change', render);
+
+        // 自动更换
+        var ini = 0;
+        setInterval(function () {
+            ini = ini >= 3 ? 0 : ini;
+            ++ini;
+            switch (ini) {
+                case 1:
+                    transform(targets.sphere, 8000);
+                    break;
+                // case 2:
+                //     transform(targets.helix, 2000);
+                //     break;
+                // case 3:
+                //     transform(targets.grid, 2000);
+                //     break;
+            }
+        }, 8000);
+
+        var button = document.getElementById('table');
+        button.addEventListener('click', function (event) {
+            transform(targets.table, 1000);
+        }, false);
+
+        var button = document.getElementById('sphere');
+        button.addEventListener('click', function (event) {
+            transform(targets.sphere, 2000);
+        }, false);
+
+        var button = document.getElementById('helix');
+        button.addEventListener('click', function (event) {
+            transform(targets.helix, 2000);
+        }, false);
+
+        var button = document.getElementById('grid');
+        button.addEventListener('click', function (event) {
+            transform(targets.grid, 2000);
+        }, false);
+
+        transform(targets.table, 2000);
+
+        //
+
+        window.addEventListener('resize', onWindowResize, false);
+
+    }
+
+    function transform(targets, duration) {
+
+        TWEEN.removeAll();
+
+        for (var i = 0; i < objects.length; i++) {
+
+            var object = objects[i];
+            var target = targets[i];
+
+            new TWEEN.Tween(object.position)
+                .to({
+                    x: target.position.x,
+                    y: target.position.y,
+                    z: target.position.z
+                }, Math.random() * duration + duration)
+                .easing(TWEEN.Easing.Exponential.InOut)
+                .start();
+
+            new TWEEN.Tween(object.rotation)
+                .to({
+                    x: target.rotation.x,
+                    y: target.rotation.y,
+                    z: target.rotation.z
+                }, Math.random() * duration + duration)
+                .easing(TWEEN.Easing.Exponential.InOut)
+                .start();
+
+        }
+
+        new TWEEN.Tween(this)
+            .to({}, duration * 2)
+            .onUpdate(render)
+            .start();
+
+    }
+
+    function onWindowResize() {
+
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        render();
+
+    }
+
+    function animate() {
+
+        // 让场景通过x轴或者y轴旋转  & z
+        scene.rotation.x += 0.0001;
+        // scene.rotation.y += 0.005; //转动速度
+        // scene.rotation.z += 0.0001;
+        requestAnimationFrame(animate);
+
+        TWEEN.update();
+
+        controls.update();
+
+        // 渲染循环
+        render();
+
+    }
+
+    function render() {
+        renderer.render(scene, camera);
+    }
+
+    function getLangDate() {
+        var dateObj = new Date();
+        var year = dateObj.getFullYear();
+        var month = dateObj.getMonth() + 1;
+        var date = dateObj.getDate();
+        var day = dateObj.getDay();
+        var weeks = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+        var week = weeks[day];
+        var hour = dateObj.getHours();
+        var minute = dateObj.getMinutes();
+        var second = dateObj.getSeconds();
+        var timeValue = "" + ((hour >= 12) ? (hour >= 18) ? "晚上" : "下午" : "上午");
+
+        var newTime = dateFilter(hour) + ":" + dateFilter(minute) + ":" + dateFilter(second);
+        var newDate = dateFilter(year) + "-" + dateFilter(month) + "-" + dateFilter(date);
+
+        $('#webTime').text(newTime);
+        $('#webDate').text(newDate + "  " + timeValue);
+
+        setTimeout("getLangDate()", 1000);
+    }
+
+    //值小于10时，在前面补0
+    function dateFilter(date) {
+        if (date < 10) {
+            return "0" + date;
+        }
+        return date;
+    }
+</script>
+
+</html>

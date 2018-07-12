@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>视频播放</title>
+<script type="text/javascript" src="static/js/wfs.js"></script>
+<script type="text/javascript">
+var wfs = null;
+function play() {
+	if (Wfs.isSupported()) {
+
+		var video1 = document.getElementById("video1");
+		wfs = new Wfs();
+		wfs.attachMedia(video1, 'ch1', 'H264Raw', 'api/stream/' + document.getElementById('deviceID').value);
+
+	} else {
+		window.alert('浏览器不支持！\n支持win8/win10的ie11(需安装更新)和edge\n支持chrome/safari/firefox等较新版本\n如果使用360等多内核浏览器，请保持更新并切换极速模式');
+	}
+};
+</script>
+</head>
+<body>
+	<h3>使用wfs.js(https://github.com/ChihChengYang/wfs.js)作为前端解码库(自己加入了一个nal切片逻辑)，需要浏览器支持MSE(http://html5test.com/compare/feature/streaming.mediasource.html；注意：IE11应该指win8/win10的IE11)及H.264(http://html5test.com/compare/feature/video.codecs.mp4.h264.html)。性能爆表！单路视频cpu只占用1%！！！</h3>
+	<p>
+		设备编号：<input id="deviceID" value="DEV002" />&emsp;<input type="button"
+			onclick="play();" value="播放" /> <input type="button"
+			onclick="!!wfs && wfs.destroy();" value="停止" />
+	</p>
+	<div class="wfsjs">
+		<video id="video1" width="640" height="480"></video>
+	</div>
+</body>
+</html>

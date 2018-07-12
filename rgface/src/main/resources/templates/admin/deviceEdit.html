@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>设备 -- 修改</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="static/admin/layui/css/layui.css" media="all" />
+	<link rel="stylesheet" href="static/admin/css/public.css" media="all" />
+</head>
+<body class="childrenBody">
+<form class="layui-form" style="width:96%;">
+	<input type="text" class="deviceId" hidden="hidden">
+	<input type="text" class="deviceContrastH" hidden="hidden">
+	<input type="text" class="deviceRepeatH" hidden="hidden">
+	<div class="layui-form-item layui-row layui-col-xs12 user_right">
+		<label class="layui-form-label">设备名称</label>
+		<div class="layui-input-block">
+			<input type="text" class="layui-input deviceName" lay-verify="required" placeholder="请输入设备名称">
+		</div>
+	</div>
+	<div class="layui-form-item layui-row layui-col-xs12">
+		<label class="layui-form-label">设备编号</label>
+		<div class="layui-input-block">
+			<input type="text" class="layui-input deviceCode" lay-verify="length|required" placeholder="请输入设备编号">
+		</div>
+	</div>
+	<div class="layui-row">
+		<div class="layui-col-md2 layui-col-xs8">
+			<label class="layui-form-label">数据服务IP</label>
+			<div class="layui-input-block ">
+				<input type="text" maxlength="3" max="255" class="layui-input Ip" id="dataServerIp_0" lay-verify="ip|required" onclick="inputOnclick(this, $('#dataServerIp_1'))" style="padding-right: 10px;text-align: center">
+			</div>
+		</div>
+		<div class="layui-col-md2 layui-col-xs4" style="width: 100px;margin-left: 5px;" >
+			<input type="text" maxlength="3" max="255" class="layui-input Ip" id="dataServerIp_1" lay-verify="ip|required" onclick="inputOnclick(this, $('#dataServerIp_2'))" style="padding-right: 10px;text-align: center">
+		</div>
+		<div class="layui-col-md2 layui-col-xs4" style="width: 100px;margin-left: 5px;">
+			<input type="text" maxlength="3" max="255" class="layui-input Ip" id="dataServerIp_2" lay-verify="ip|required" onclick="inputOnclick(this, $('#dataServerIp_3'))" style="padding-right: 10px;text-align: center">
+		</div>
+		<div class="layui-col-md2 layui-col-xs4" style="width: 100px;margin-left: 5px;">
+			<input type="text" maxlength="3" max="255" class="layui-input Ip" id="dataServerIp_3" lay-verify="ip|required" onclick="inputOnclick(this)" style="padding-right: 10px;text-align: center">
+		</div>
+	</div>
+	<div class="magb15 layui-col-md4 layui-col-xs8" style="margin-top: 3px;">
+		<label class="layui-form-label" style="font-size: 12px;">数据服务端口</label>
+		<div class="layui-input-block">
+			<input type="text" class="layui-input dataServerPort" lay-verify="port|number|required" placeholder="端口(0 ~ 32767)">
+		</div>
+	</div>
+
+	<div class="layui-row">
+		<div class="layui-col-md2 layui-col-xs8">
+			<label class="layui-form-label">配置服务IP</label>
+			<div class="layui-input-block">
+				<input type="text" maxlength="3" max="255" class="layui-input Ip" id="configServerIp_0" lay-verify="ip|required" onclick="inputOnclick(this, $('#configServerIp_1'))" style="padding-right: 10px;text-align: center">
+			</div>
+		</div>
+		<div class="layui-col-md2 layui-col-xs4" style="width: 100px;margin-left: 5px;">
+			<input type="text" maxlength="3" max="255" class="layui-input Ip" id="configServerIp_1" lay-verify="ip|required" onclick="inputOnclick(this, $('#configServerIp_2'))" style="padding-right: 10px;text-align: center">
+		</div>
+		<div class="layui-col-md2 layui-col-xs4" style="width: 100px;margin-left: 5px;">
+			<input type="text" maxlength="3" max="255" class="layui-input Ip" id="configServerIp_2" lay-verify="ip|required" onclick="inputOnclick(this, $('#configServerIp_3'))" style="padding-right: 10px;text-align: center">
+		</div>
+		<div class="layui-col-md2 layui-col-xs4" style="width: 100px;margin-left: 5px;">
+			<input type="text" maxlength="3" max="255" class="layui-input Ip" id="configServerIp_3" lay-verify="ip|required" onclick="inputOnclick(this)" style="padding-right: 10px;text-align: center">
+		</div>
+	</div>
+	<div class="magb15 layui-col-md4 layui-col-xs8" style="margin-top: 3px;">
+		<label class="layui-form-label" style="font-size: 12px;">配置服务端口</label>
+		<div class="layui-input-block">
+			<input type="text" class="layui-input configServerPort" lay-verify="port|number|required" placeholder="端口(0 ~ 32767)">
+		</div>
+	</div>
+	<div class="layui-row">
+		<div class="layui-form-item layui-col-md4 layui-col-xs8">
+			<label class="layui-form-label">固件版本</label>
+			<div class="layui-input-block">
+				<input type="text" class="layui-input deviceFirmwareVersion" placeholder="请输入固件版本号" value="0" disabled>
+			</div>
+		</div>
+		<div class="magb15 layui-col-md4 layui-col-xs12">
+			<label class="layui-form-label">设备类型</label>
+			<div class="layui-input-block">
+				<select name="deviceType" class="deviceType" lay-filter="deviceType">
+
+				</select>
+			</div>
+		</div>
+	</div>
+    <div class="layui-row">
+        <div class="magb15 layui-col-md2 layui-col-xs12">
+            <label class="layui-form-label">对比开关</label>
+            <div class="layui-input-block">
+                <input type="checkbox" class="device_contrast" lay-filter="device_contrast" lay-skin="switch" lay-text="开启|关闭">
+            </div>
+        </div>
+        <div class="magb15 layui-col-md2 layui-col-xs12">
+            <label class="layui-form-label">相似度(/%)</label>
+            <div class="layui-input-block">
+                <input type="number" maxlength="3" max="100" min="10" value="10" class="layui-input contrastLike" placeholder="请输入相似度(10%-100%)" style="text-align: center;" disabled>
+            </div>
+        </div>
+        <div class="magb15 layui-col-md4 layui-col-xs12">
+            <div class="layui-input-block" style="margin-left: 20px;">
+                <button type="button" class="layui-btn btn_setContrastLike" style="background-color: #5FB878;">设置</button>
+                <span style="font-size: 14px; color: #FF5722;margin-left: 20px;">相似度建议70~100之间</span>
+            </div>
+        </div>
+    </div>
+	<div class="layui-row">
+		<div class="magb15 layui-col-md2 layui-col-xs12">
+			<label class="layui-form-label">去除重复</label>
+			<div class="layui-input-block">
+				<input type="checkbox" class="device_repeat" lay-filter="device_repeat" lay-skin="switch" lay-text="开启|关闭">
+			</div>
+		</div>
+		<div class="magb15 layui-col-md2 layui-col-xs12">
+			<label class="layui-form-label">重复时间(/s)</label>
+			<div class="layui-input-block">
+				<input type="number" maxlength="3" max="255" min="1" value="1" class="layui-input repeatTimeInterval" placeholder="请输入重复时间间隔" style="text-align: center;" disabled>
+			</div>
+		</div>
+        <div class="magb15 layui-col-md1 layui-col-xs12">
+            <div class="layui-input-block" style="margin-left: 20px;">
+                <button type="button" class="layui-btn btn_setRepeatTime" style="background-color: #5FB878;">设置</button>
+            </div>
+        </div>
+	</div>
+	<div class="layui-form-item layui-row layui-col-xs12">
+		<label class="layui-form-label">备注</label>
+		<div class="layui-input-block">
+			<textarea placeholder="备注(选填)" class="layui-textarea deviceNotes"></textarea>
+		</div>
+	</div>
+	<div class="layui-form-item layui-row layui-col-xs12">
+		<div class="layui-input-block">
+			<button class="layui-btn layui-btn-sm" lay-submit="" lay-filter="updateAdminDevice">修改</button>
+			<button type="reset" class="layui-btn layui-btn-sm layui-btn-primary">清空</button>
+		</div>
+	</div>
+</form>
+<script type="text/javascript" src="static/admin/layui/layui.js"></script>
+<script type="text/javascript" src="static/admin/js/deviceEdit.js"></script>
+<script type="text/javascript" src="static/admin/js/jquery.js"></script>
+</body>
+<script type="text/javascript" src="static/admin/js/baseIPInput.js"></script>
+<script>
+
+	function initContrast(value, contrastLikeVal) {
+
+        if (value === 0) {
+            $('.device_contrast').attr("checked", true);
+
+            $('.contrastLike').removeAttr("disabled");
+		}
+
+        $('.contrastLike').val(contrastLikeVal);
+        layui.form.render();
+    }
+
+    function initRepeat(value, repeatTimeInterval) {
+
+        if (value === 0) {
+            $('.device_repeat').attr("checked", true);
+
+            $('.repeatTimeInterval').removeAttr("disabled");
+        }
+        $('.repeatTimeInterval').val(repeatTimeInterval);
+        layui.form.render();
+    }
+
+
+    //初始化设备类型
+    function initDeviceType(value) {
+
+	    var html;
+
+        if (value === 0) {
+            html = '<option value="0" selected="selected">进</option>' +
+                ' <option value="1">出</option>';
+        }
+
+        if (value === 1) {
+            html = '<option value="0">进</option>' +
+                ' <option value="1" selected="selected">出</option>';
+        }
+
+        $('.deviceType').append(html);
+
+        layui.form.render(); //渲染form
+    }
+</script>
+</html>

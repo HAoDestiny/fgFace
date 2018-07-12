@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!--<property name="connection.url"/>-->
+        <!--<property name="connection.driver_class"/>-->
+        <!--<property name="connection.username"/>-->
+        <!--<property name="connection.password"/>-->
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/rgface</property>
+        <!-- DB schema will be updated if needed -->
+        <!-- <property name="hbm2ddl.auto">update</property> -->
+
+        <!-- SQL dialect -->
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+        <!-- Enable Hibernate's automatic session context management -->
+        <property name="current_session_context_class">thread</property>
+
+        <!-- Echo all executed SQL to stdout -->
+        <property name="show_sql">false</property>
+        <mapping class="net.sh.rgface.entity.AccountEntity"/>
+        <mapping class="net.sh.rgface.entity.AccountInfoEntity"/>
+        <mapping class="net.sh.rgface.entity.DeviceEntity"/>
+        <mapping class="net.sh.rgface.entity.FaceEntity"/>
+        <mapping class="net.sh.rgface.entity.FileEntity"/>
+        <mapping class="net.sh.rgface.entity.RecordingEntity"/>
+        <mapping class="net.sh.rgface.entity.PersonnelEntity"/>
+        <mapping class="net.sh.rgface.entity.test.AccountEntity"/>
+        <mapping class="net.sh.rgface.entity.test.AccountInfoEntity"/>
+        <mapping class="net.sh.rgface.entity.test.DeviceEntity"/>
+        <mapping class="net.sh.rgface.entity.test.FaceEntity"/>
+        <mapping class="net.sh.rgface.entity.test.FileEntity"/>
+        <mapping class="net.sh.rgface.entity.test.PersonnelEntity"/>
+        <mapping class="net.sh.rgface.entity.test.RecordingEntity"/>
+        <mapping class="net.sh.rgface.entity.RequestLogEntity"/>
+        <mapping class="net.sh.rgface.entity.SystemParamEntity"/>
+        <mapping class="net.sh.rgface.entity.EnvironmentImgEntity"/>
+        <mapping class="net.sh.rgface.entity.PersonnelCountEntity"/>
+        <mapping class="net.sh.rgface.entity.FaceReviewEntity"/>
+
+    </session-factory>
+</hibernate-configuration>
